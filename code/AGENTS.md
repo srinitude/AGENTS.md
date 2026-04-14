@@ -103,31 +103,53 @@ If you violate any of these constraints, the output is considered incorrect.
 
 ### 8.2 Maximum Construct Size (≤ 30 LOC)
 
+* A “construct” is any language-level type or unit defined within a file, NOT the entire file.
+
 * Every construct MUST be ≤ 30 lines of executable code.
+
 * Applies to:
 
   * Functions / methods
   * Classes
   * Interfaces / types
   * Structs / protocols
-  * Modules
+  * Enums, modules, and any other declared types
+
 * Rules:
 
   * Blank lines and comments count
   * Inline closures/lambdas count toward the parent construct
+
 * If exceeded, MUST refactor via:
 
   * Function decomposition
   * Composition
   * Module extraction
 
-### 8.3 Single Responsibility Enforcement
+### 8.3 Maximum File Size (≤ 200 LOC)
+
+* Every file MUST be ≤ 200 lines of code total.
+
+* This includes:
+
+  * All constructs
+  * Imports
+  * Comments
+  * Blank lines
+
+* If exceeded, MUST refactor via:
+
+  * Splitting into multiple files
+  * Extracting modules
+  * Isolating responsibilities per file
+
+### 8.4 Single Responsibility Enforcement
 
 * Each construct MUST have one clearly defined responsibility.
 * Mixed concerns within a single construct are prohibited.
 * Violations MUST be split into smaller units.
 
-### 8.4 Prohibited Patterns
+### 8.5 Prohibited Patterns
 
 * Nesting depth > 3 under any circumstance
 * Multi-responsibility ("god") constructs
@@ -135,7 +157,7 @@ If you violate any of these constraints, the output is considered incorrect.
 * Large test blocks obscuring behavior
 * Implicit control flow that increases cognitive depth
 
-### 8.5 Required Refactoring Strategies
+### 8.6 Required Refactoring Strategies
 
 * Flatten control flow aggressively
 * Prefer pure functions
@@ -143,7 +165,7 @@ If you violate any of these constraints, the output is considered incorrect.
 * Extract intermediate variables for clarity
 * Co-locate logic with explicit boundaries
 
-### 8.6 Enforcement
+### 8.7 Enforcement
 
 * These are hard constraints, not guidelines
 * Any violation MUST be resolved immediately
