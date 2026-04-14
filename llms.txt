@@ -1,0 +1,161 @@
+# agents-md
+
+A collection of AGENTS.md directive files that encode strict, domain-specific workflows for AI agents. Each file tells an agent how to work — not what to build — through hard constraints that measurably change behavior.
+
+## What this repo does
+
+This repo provides ready-to-use AGENTS.md files organized by domain. An AGENTS.md is a project-level directive file that AI coding agents (Cursor, Claude Code, Codex, pi, and others) read automatically to govern how they operate. Drop one into your project root and the agent follows your rules.
+
+## How to install
+
+The `install.sh` script composes and places AGENTS.md files into any target project. It has two modes:
+
+### Compose mode (default)
+
+Merges root directives with one or more domain-specific rule sets into a single AGENTS.md file.
+
+```
+./install.sh <target-directory> [domain ...]
+```
+
+- `./install.sh ~/project` — root directives only (universal principles)
+- `./install.sh ~/project code` — root + code domain rules
+- `./install.sh ~/project code writing` — root + code + writing rules in one file
+
+### Scatter mode
+
+Places root directives at the project root and each domain's rules in the specified subdirectory, using the subdir:domain mapping format.
+
+```
+./install.sh --scatter <target-directory> <subdir:domain> ...
+```
+
+- `./install.sh --scatter ~/project src:code docs:writing` — root at project root, code rules in src/, writing rules in docs/
+
+Agents that support AGENTS.md hierarchy inherit root principles everywhere and apply domain rules only within their subdirectory.
+
+## File structure
+
+```
+AGENTS.md              Root directives: hierarchy, inheritance, core principles
+architecture/AGENTS.md Architecture and design decision constraints
+code/AGENTS.md         TDD-strict software engineering constraints
+data/AGENTS.md         Data analysis and reproducibility constraints
+planning/AGENTS.md     Project planning and estimation constraints
+research/AGENTS.md     Research and investigation constraints
+writing/AGENTS.md      Structured drafting process constraints
+install.sh             Installer script (compose and scatter modes)
+test.sh                Test runner (pure bash, zero dependencies)
+llms.txt               This file
+README.md              Human-readable documentation
+LICENSE                Apache License 2.0
+```
+
+## Root AGENTS.md
+
+The root AGENTS.md defines universal principles that apply to all work, regardless of domain:
+
+- Hierarchy & Inheritance: root authority governs all nested AGENTS.md files at any depth. Subdirectory files add constraints but never remove those imposed by ancestors.
+- Constraints Produce Quality: every rule must be concrete, enforceable, and observable.
+- Process Over Output: how you work matters more than what you produce. Sequential phases must not be skipped or combined.
+- Observable Behavior Over Implementation: validate what the end user sees, not internal structure.
+- Explicit Over Implicit: all dependencies, assumptions, and sources must be stated.
+- Small, Focused Units: every unit of work has one responsibility. Decomposition is non-negotiable.
+- Earned Output: agents must follow the defined process completely. No shortcuts.
+- Enforcement: hard constraints, not suggestions. Stricter interpretation wins.
+
+## Domain: architecture (architecture/AGENTS.md)
+
+Structured evaluation for architectural decisions:
+
+- Problem Before Solution: document what is broken or missing before proposing any technology.
+- Constraints Documentation: performance, cost, team, timeline, compliance — all stated before evaluation.
+- Alternatives Required: at least two distinct options evaluated. "Do nothing" always considered.
+- Trade-Off Analysis: every option states what you gain, lose, and what risks emerge.
+- Decision Records: every decision produces a written record with context, alternatives, rationale.
+- Reversibility Assessment: classify each decision as easily reversible, reversible with effort, or irreversible.
+- Failure Mode Analysis: document expected failure modes and recovery paths.
+- Incremental Validation: validate decisions cheaply before full implementation.
+
+## Domain: code (code/AGENTS.md)
+
+Strict TDD-first software engineering. The agent must operate in a RED → GREEN → REFACTOR cycle:
+
+- RED: write a failing test for user-facing behavior before any production code.
+- GREEN: write the smallest code to pass the test. No preemptive generalization.
+- REFACTOR: improve structure only after tests pass. No behavior changes.
+
+Additional constraints:
+- All dependencies must be injected, never constructed inside business logic.
+- Tests must validate observable outcomes only (inputs, outputs, side effects).
+- Testing private/internal functions is prohibited.
+- Maximum nesting depth: 3 levels.
+- Maximum construct size: 30 lines of code.
+- Single responsibility per construct.
+
+## Domain: data (data/AGENTS.md)
+
+Reproducible, documented data work:
+
+- Assumptions Before Transformations: schema, ranges, nulls, units — all stated upfront.
+- No Magic Numbers: every threshold and constant named and justified.
+- Transformation Documentation: every step documented with purpose, input shape, output shape.
+- Edge Case Exploration: empty datasets, nulls, duplicates, extremes — all explicitly considered.
+- Sample Sizes and Significance: aggregates report sample sizes, percentages include absolute counts.
+- Reproducibility: fixed seeds, documented environment dependencies, traceable steps.
+- Source Data Integrity: provenance documented, modifications tracked separately from analysis.
+- Conclusions and Limitations: state what data shows and does not show. No correlation as causation.
+
+## Domain: planning (planning/AGENTS.md)
+
+Structured decomposition for project planning:
+
+- Scope Decomposition: break work into independently deliverable, verifiable units.
+- Dependency Mapping: identify all dependencies before sequencing.
+- Risk Identification: specific risks with likelihood, impact, and mitigation strategies.
+- Unknowns Are First-Class: list what is not yet known, with resolution strategies.
+- Estimates Require Assumptions: ranges or confidence levels, never single precise numbers.
+- Critical Path Identification: determine minimum duration and parallelizable work.
+- Resource and Capacity Constraints: account for people, time, budget, infrastructure.
+- Milestones and Checkpoints: verifiable intermediate outcomes, not activity completion.
+- Change Management: assess impact before absorbing scope changes.
+
+## Domain: research (research/AGENTS.md)
+
+Structured inquiry with mandatory uncertainty disclosure:
+
+- Question Before Investigation: explicitly stated, narrowly scoped question or hypothesis.
+- Evidence Gathering: multiple sources, classified by type. Actively seek disconfirming evidence.
+- Counter-Arguments Required: at least one for every conclusion. Dismissal requires explicit reasoning.
+- Confidence Assessment: every claim labeled high, moderate, low, or speculative.
+- Source Attribution: every claim cites its source or states no source was found.
+- Uncertainty Disclosure: unknowns, gaps, and limitations stated explicitly. No gap-filling with fabrication.
+- Reasoning Transparency: visible chain from evidence to conclusion. Assumptions labeled.
+- Revision and Self-Correction: update or retract findings when contradicted by new evidence.
+
+## Domain: writing (writing/AGENTS.md)
+
+Structured drafting process. No final text without completing all phases:
+
+- Purpose Before Prose: explicit purpose statement required before drafting.
+- Audience Identification: name the reader, state assumptions about their knowledge.
+- Outline First: outline before any prose. Each entry represents one idea.
+- One Idea Per Paragraph: first sentence states the idea, rest supports it.
+- Claims Require Grounding: every factual claim must be sourced or labeled as opinion.
+- Revision Process: at least one revision pass. First drafts never ship as final output.
+- Concision: every sentence justifies its existence. Filler is removed.
+- Structural Clarity: headings match content, transitions are explicit.
+- Voice and Consistency: consistent tone, active voice by default.
+
+## Testing
+
+Run `./test.sh` to execute the full test suite. Two suites:
+
+- test_install: validates installer behavior (compose, scatter, error handling, idempotency, --help)
+- test_structure: validates repo contracts (required files, AGENTS.md quality gates, README coverage, license)
+
+Every AGENTS.md in the repo is automatically validated for minimum quality: ≥10 lines, ≥2 sections, ≥3 bullet constraints, imperative enforcement language.
+
+## License
+
+Apache License 2.0. See LICENSE file.
