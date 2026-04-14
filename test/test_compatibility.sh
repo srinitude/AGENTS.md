@@ -162,7 +162,7 @@ code_content="$(cat "$REPO_DIR/code/AGENTS.md")"
 
 assert_contains "mentions functions" "$code_content" "Functions"
 assert_contains "mentions methods" "$code_content" "methods"
-assert_contains "mentions modules" "$code_content" "Modules"
+assert_contains "mentions modules" "$code_content" "modules"
 assert_not_contains "no JavaScript-specific terms" "$code_content" "npm"
 assert_not_contains "no Python-specific terms" "$code_content" "pip install"
 assert_not_contains "no Java-specific terms" "$code_content" "Spring"

@@ -90,7 +90,8 @@ Additional constraints:
 - Tests must validate observable outcomes only (inputs, outputs, side effects).
 - Testing private/internal functions is prohibited.
 - Maximum nesting depth: 3 levels.
-- Maximum construct size: 30 lines of code.
+- Maximum construct size: 30 lines of code per language-level construct.
+- Maximum file size: 200 lines of code total.
 - Single responsibility per construct.
 
 ## Domain: data (data/AGENTS.md)

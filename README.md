@@ -13,7 +13,7 @@ Different projects demand different disciplines. The way I want an agent to appr
 | File | Domain | Philosophy |
 |------|--------|------------|
 | `architecture/AGENTS.md` | **Architecture & design** | Problem → Constraints → Alternatives → Trade-offs → Decision record. At least two options evaluated, reversibility assessed, failure modes documented |
-| `code/AGENTS.md` | **TDD-strict software engineering** | Red → Green → Refactor with hard structural constraints (nesting ≤ 3, constructs ≤ 30 LOC, dependency injection at the boundary) |
+| `code/AGENTS.md` | **TDD-strict software engineering** | Red → Green → Refactor with hard structural constraints (nesting ≤ 3, constructs ≤ 30 LOC, files ≤ 200 LOC, dependency injection at the boundary) |
 | `data/AGENTS.md` | **Data & analytics** | Assumptions stated, transformations documented, edge cases explored, sample sizes reported. No magic numbers, no undocumented transforms, no conclusions without limitations |
 | `planning/AGENTS.md` | **Project planning** | Scope → Dependencies → Risks → Unknowns → Estimates. Critical path identified, capacity constraints respected, no point estimates without assumptions |
 | `research/AGENTS.md` | **Research & analysis** | Question → Evidence → Counter-arguments → Confidence assessment. Sources attributed, uncertainty disclosed, reasoning chain visible |
@@ -94,7 +94,7 @@ Every `AGENTS.md` in this collection follows a few core beliefs:
 - **Process over output.** Specifying *how* to work matters more than specifying *what* to produce. Good process reliably yields good results.
 - **Observable behavior over implementation.** Whether it's testing software or reviewing a draft, validate what the user actually sees and experiences.
 - **Dependencies are explicit.** In code, this means injection. In writing, this means cited sources. In analysis, this means stated assumptions. Nothing is implicit.
-- **Small, focused units.** 30-line functions. Single-responsibility paragraphs. One-claim-per-section arguments. Decomposition is non-negotiable.
+- **Small, focused units.** 30-line functions. 200-line code files. Single-responsibility paragraphs. One-claim-per-section arguments. Decomposition is non-negotiable.
 
 ## Testing
 
